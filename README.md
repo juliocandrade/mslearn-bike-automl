@@ -36,7 +36,7 @@ Criar um novo trabalho automatizado, treinar, criar modelo, implantar, testar o 
 
 1. No Azure Machine Learning Studio, veja a página Automated ML **(em Authoring)**.
 
-2. Crie um novo trabalho de ML automatizado com as seguintes configurações, usando **Next** conforme necessário para avançar pela interface do usuário:
+2. Crie um novo trabalho de ML automatizado com as seguintes configurações, usando **Avançar** conforme necessário para avançar pela interface do usuário:
 
      ### Configurações básicas:
 
@@ -55,12 +55,12 @@ Criar um novo trabalho automatizado, treinar, criar modelo, implantar, testar o 
         #### Tipo de dados:
      
         - **Nome**: bike-rentals;
-        - **Descrição**: dados históricos de aluguel de bicicletas;
+        - **Descrição**: Dados históricos de aluguel de bicicletas;
         - **Tipo**: Tabular;
 
         #### Fonte de dados:
      
-        - Selecione **"Dos arquivos da web"**;
+        - Selecione **"De arquivos da Web"**;
 
         #### URL da Web:
 
@@ -69,16 +69,16 @@ Criar um novo trabalho automatizado, treinar, criar modelo, implantar, testar o 
           
         #### Configurações:
 
-        - **Formato de arquivo**: Delimitado;
+        - **Formato do arquivo**: Delimitado;
         - **Delimitador**: Vírgula;
         - **Codificação**: UTF-8;
         - **Cabeçalhos de coluna**: apenas o primeiro arquivo possui cabeçalhos;
-        - **Pular linhas**: Nenhum;
-        - **O conjunto de dados contém dados multilinhas**: não selecione;
+        - **Ignorar linhas**: Nenhum;
+        - **Conjunto de dados com dados de várias linhas**: não selecione;
 
         #### Esquema:
 
-        - Incluir todas as colunas exceto **Caminho**;
+        - Incluir todas as colunas exceto **Path**;
         - Revise os tipos detectados automaticamente;
 
        #### Criar:
@@ -89,12 +89,12 @@ Criar um novo trabalho automatizado, treinar, criar modelo, implantar, testar o 
   
        - **Tipo de tarefa**: Regressão;
        - **Conjunto de dados**: bike-rentals;
-       - **Coluna de destino**: Rentals (integer);
+       - **Coluna de destino**: rentals (Integer);
 
        ### Configurações adicionais:
 
-       - **Métrica primária**: raiz do erro quadrático médio normalizado;
-       - **Explique o melhor modelo**: Não selecionado;
+       - **Métrica primária**: Normalized root mean squared error;
+       - **Explicar o melhor modelo**: Não selecionado;
        - **Usar todos os modelos suportados**: Desmarcado. Você restringirá o trabalho para tentar apenas alguns algoritmos 
        específicos;
        - **Modelos permitidos**: Selecione apenas **RandomForest** e **LightGBM** — normalmente você gostaria de tentar o máximo possível, mas 
@@ -102,25 +102,25 @@ Criar um novo trabalho automatizado, treinar, criar modelo, implantar, testar o 
 
        #### Limites: Expanda a seção
     
-       - **Máximo de testes**: 3;
-       - **Máximo de testes simultâneos**: 3;
+       - **Máximo de avaliações**: 3;
+       - **Máximo de avaliações simultâneas**: 3;
        - **Máximo de nós**: 3;
-       - **Limite de pontuação da métrica**: 0,085 ( para que, se um modelo atingir uma pontuação da métrica de erro quadrático médio normalizado de 0,085 ou menos, o trabalho termina);
-       - **Tempo limite**: 15;
-       - **Tempo limite de iteração**: 15;
-       - **Habilitar rescisão antecipada**: selecionado;
+       - **Limite de pontuação da métrica**: 0,085 (para que, se um modelo atingir uma pontuação da métrica de erro quadrático médio normalizado de 0,085 ou menos, o trabalho termina);
+       - **Tempo limite do experimento (minutos)**: 15;
+       - **Tempo limite de iteração (minutos)**: 15;
+       - **Habilitar encerramento antecipado**: selecionado;
 
-        #### Validação e teste:
+        #### Validação e testar:
 
-       - Tipo de validação: divisão de validação de treinamento;
-       - Porcentagem de dados de validação: 10;
-       - Conjunto de dados de teste: Nenhum;
+       - **Tipo de validação**: divisão de validação de treinamento;
+       - **Validação de percentual de dados**: 10;
+       - **Dados de teste**: Nenhum;
 
-       #### Calcular:
+       #### Computação:
 
       - **Selecione o tipo de computação**: sem servidor;
       - **Tipo de máquina virtual**: CPU;
-      - **Camada de máquina virtual**: Dedicada;
+      - **Camada de máquina virtual**: Dedicado;
       - **Tamanho da máquina virtual**: Standard_DS3_V2*;
       - **Número de instâncias**: 1;
       
@@ -137,15 +137,16 @@ Quando o trabalho automatizado de aprendizado de máquina for concluído, você 
    ![imagem de status de modelo](https://github.com/juliocandrade/mslearn-bike-automl/assets/66694754/666b0438-a38f-41ea-95c3-06764487c378)
 >[!WARNING]
 > Você poderá ver uma mensagem com o status “Aviso: pontuação de saída especificada pelo usuário alcançada…”. Esta é uma mensagem esperada. Continue para a próxima etapa.
+
 2. Selecione o texto em **Nome do algoritmo** do melhor modelo para visualizar seus detalhes.
-3. Selecione a guia **Métricas** e selecione os gráficos **residuais** e **predito_true** se eles ainda não estiverem selecionados.
-   Revise os gráficos que mostram o desempenho do modelo. O gráfico de **resíduos** mostra os *resíduos* (as diferenças entre os valores previstos e reais) como um histograma. O gráfico predito_true compara os valores previstos com os valores verdadeiros.
+3. Selecione a guia **Métricas** e selecione os gráficos **residuals** e **predicted_true** se eles ainda não estiverem selecionados.
+   Revise os gráficos que mostram o desempenho do modelo. O gráfico de **residuals** mostra os *resíduos* (as diferenças entre os valores previstos e reais) como um histograma. O gráfico predito_true compara os valores previstos com os valores verdadeiros.
 </details>
 <details>
 <summary>Implantar e testar o modelo</summary>
 
-1. Na guia **Modelo** do melhor modelo treinado pelo seu trabalho automatizado de machine learning, selecione **Implantar** e use a opção de **serviço Web** para implantar o modelo com as seguintes configurações:
-      - **Nome**: prever-aluguéis;
+1. Na guia **Modelo** do melhor modelo treinado pelo seu trabalho automatizado de machine learning, selecione **Implantar** e use a opção de **Serviço Web** para implantar o modelo com as seguintes configurações:
+      - **Nome**: predict-rentals;
       - **Descrição**: Prever aluguel de bicicletas;
       - **Tipo de computação**: Instância de Contêiner do Azure;
       - **Habilitar autenticação**: selecionado;
@@ -157,9 +158,9 @@ Quando o trabalho automatizado de aprendizado de máquina for concluído, você 
 
 Agora você pode testar seu serviço implantado.
 
-1. No estúdio Azure Machine Learning, no menu esquerdo, selecione **Endpoints** e abra o ponto final em tempo real de previsão de aluguel.
-2. Na página do endpoint em tempo real de **previsão de aluguel**, visualize a guia **Teste**.
-3. No painel **Dados de entrada para testar o endpoint**, substitua o modelo **JSON** pelos seguintes dados de entrada:
+1. No estúdio Azure Machine Learning, no menu esquerdo, selecione **Pontos de extremidade** e abra o ponto final em tempo real predict-rentals.
+2. Na página do endpoint em tempo real de **predict-rentals**, visualize a guia **Testar**.
+3. No painel **Inserir dados para teste de ponto de extremidade**, substitua o modelo **JSON** pelos seguintes dados de entrada:
 
                                              {
                                                "Inputs": { 
@@ -201,7 +202,7 @@ Vamos revisar o que você fez. Você usou um conjunto de dados históricos de al
 
 O serviço web que você criou está hospedado em uma *instância de contêiner do Azure*. Se não pretender experimentá-lo ainda mais, deverá excluir para evitar cobrança desnecessária de recursos do Azure.
 
-1. No [Studio Azure Machine Learning](https://ml.azure.com/?azure-portal=true), na guia **Endpoints**, selecione o ponto de **extremidade de previsão de aluguel**. Em seguida, selecione **Excluir** e confirme que deseja excluir o endpoint.
+1. No [Studio Azure Machine Learning](https://ml.azure.com/?azure-portal=true), na guia **Pontosd e extremidade**, selecione o ponto de extremidade **predict-rentals**. Em seguida, selecione **Excluir** e confirme que deseja excluir o ponto de extremidade.
 2. Excluir sua computação garante que sua assinatura não será cobrada por recursos de computação. No entanto, será cobrada uma pequena quantia pelo armazenamento de dados, desde que o espaço de trabalho do Azure Machine Learning exista na sua assinatura. Se tiver terminado de explorar o Azure Machine Learning, poderá eliminar o espaço de trabalho Azure Machine Learning e os recursos associados.
 
 Para excluir seu espaço de trabalho:
